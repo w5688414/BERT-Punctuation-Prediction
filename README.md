@@ -30,3 +30,17 @@ sh run_train.sh
 cd bert/
 sh run_predict.sh
 ```
+
+```
+Evaluate on asr:
+----------------------------------------------
+PUNCTUATION      PRECISION RECALL    F-SCORE
+,COMMA           83.22     83.39     83.30
+.PERIOD          83.12     74.77     78.72
+?QUESTIONMARK    75.67     76.26     75.96
+----------------------------------------------
+Overall          83.12     81.06     82.08
+ERR: 2.3%
+SER: 27.7%
+
+```
