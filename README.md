@@ -19,6 +19,14 @@ python process_raw.py
 python dataprocess_peopledaily.py
 ```
 ## training
+
 ```
-python cn_punctor.py
+cd bert/
+sh run_train.sh
+```
+## inference
+
+```
+cd bert/
+sh run_predict.sh
 ```

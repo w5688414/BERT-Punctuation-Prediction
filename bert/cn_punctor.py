@@ -78,9 +78,9 @@ flags.DEFINE_integer(
     "Sequences longer than this will be truncated, and sequences shorter "
     "than this will be padded.")
 flags.DEFINE_boolean('clean', False, 'remove the files which created by last training')
-flags.DEFINE_bool("do_train",True, "Whether to run training.")
+flags.DEFINE_bool("do_train",False, "Whether to run training.")
 flags.DEFINE_bool("use_tpu", False, "Whether to use TPU or GPU/CPU.")
-flags.DEFINE_bool("do_eval", True, "Whether to run eval on the dev set.")
+flags.DEFINE_bool("do_eval", False, "Whether to run eval on the dev set.")
 flags.DEFINE_bool("do_predict", True, "Whether to run eval on the dev set.")
 
 flags.DEFINE_integer("train_batch_size", 4, "Total batch size for training.")
@@ -875,8 +875,8 @@ def main():
         'punctor': PunctorProcessor,
     }
 
-    if not FLAGS.do_train and not FLAGS.do_eval:
-        raise ValueError("At least one of `do_train` or `do_eval` must be True.")
+    if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
+        raise ValueError("At least one of `do_train` or `do_eval` or `do_predict` must be True.")
 
     bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
@@ -1134,8 +1134,8 @@ def main():
 
         with codecs.open(output_predict_file, 'w', encoding='utf-8') as writer:
             result_to_pair(writer)
-        target_path =  '/data/dh/neural_sequence_labeling-master/data/raw/LREC/2014_test.txt'
-        predict_path = '/data/dh/neural_sequence_labeling-master/bert/output_pd/label_test_pd.txt'
+        target_path =  '../data/raw/LREC/2014_test.txt'
+        predict_path = '../data/output_pd/label_test_pd.txt'
         out_str, f1, err, ser = compute_score(target_path,predict_path)
         tf.logging.info("\nEvaluate on {}:\n{}\n".format('asr', out_str))
 
